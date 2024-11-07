@@ -1,0 +1,169 @@
+simple To-Do List App project in Java:
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Task {
+    private String name;
+    private boolean completed;
+
+    public Task(String name) {
+        this.name = name;
+        this.completed = false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+}
+
+public class ToDoList {
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("To-Do List App");
+            System.out.println("1. Add Task");
+            System.out.println("2. Remove Task");
+            System.out.println("3. Mark as Completed");
+            System.out.println("4. View Tasks");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline left-over
+
+            switch (choice) {
+                case 1:
+                    addTask();
+                    break;
+                case 2:
+                    removeTask();
+                    break;
+                case 3:
+                    markAsCompleted();
+                    break;
+                case 4:
+                    viewTasks();
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+
+    private static void addTask() {
+        System.out.print("Enter task name: ");
+        String taskName = scanner.nextLine();
+
+        Task task = new Task(taskName);
+        tasks.add(task);
+        System.out.println("Task added successfully!");
+    }
+
+    private static void removeTask() {
+        System.out.print("Enter task number to remove: ");
+        int taskNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume newline left-over
+
+        if (taskNumber > 0 && taskNumber <= tasks.size()) {
+            tasks.remove(taskNumber - 1);
+            System.out.println("Task removed successfully!");
+        } else {
+            System.out.println("Invalid task number!");
+        }
+    }
+
+    private static void markAsCompleted() {
+        System.out.print("Enter task number to mark as completed: ");
+        int taskNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume newline left-over
+
+        if (taskNumber > 0 && taskNumber <= tasks.size()) {
+            Task task = tasks.get(taskNumber - 1);
+            task.setCompleted(true);
+            System.out.println("Task marked as completed!");
+        } else {
+            System.out.println("Invalid task number!");
+        }
+    }
+
+    private static void viewTasks() {
+        System.out.println("Tasks:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            System.out.println((i + 1) + ". " + task.getName() + (task.isCompleted() ? " (Completed)" : ""));
+        }
+    }
+}
+
+
+Features:
+
+1. Add tasks
+2. Remove tasks
+3. Mark tasks as completed
+4. View tasks
+5. Exit
+
+How to run:
+
+1. Save the code in a file named ToDoList.java.
+2. Compile the code using javac ToDoList.java.
+3. Run the program using java ToDoList.
+
+Example usage:
+
+
+To-Do List App
+1. Add Task
+2. Remove Task
+3. Mark as Completed
+4. View Tasks
+5. Exit
+Enter choice: 1
+Enter task name: Buy milk
+Task added successfully!
+
+To-Do List App
+1. Add Task
+2. Remove Task
+3. Mark as Completed
+4. View Tasks
+5. Exit
+Enter choice: 4
+Tasks:
+1. Buy milk
+
+To-Do List App
+1. Add Task
+2. Remove Task
+3. Mark as Completed
+4. View Tasks
+5. Exit
+Enter choice: 3
+Enter task number to mark as completed: 1
+Task marked as completed!
+
+To-Do List App
+1. Add Task
+2. Remove Task
+3. Mark as Completed
+4. View Tasks
+5. Exit
+Enter choice: 4
+Tasks:
+1. Buy milk (Completed)
